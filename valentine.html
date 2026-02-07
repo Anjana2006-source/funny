@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: linear-gradient(to right, #ff9a9e, #fad0c4);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 40px;
+        color: #fff;
+    }
+
+    button {
+        padding: 15px 30px;
+        margin: 15px;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .yes {
+        background-color: #ff4d6d;
+        color: white;
+    }
+
+    .no {
+        background-color: #444;
+        color: white;
+    }
+
+    #flowers {
+        display: none;
+        font-size: 50px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Will You Be My Valentine? ❤️</h1>
+
+<button class="yes" onclick="sayYes()">Yes 💖</button>
+<button class="no" onclick="sayNo()">No 😢</button>
+
+<div id="flowers">
+    💐🌸🌹🌺🌷💐
+    <p style="font-size:30px;color:white;">Yayyyyy! ❤️</p>
+</div>
+
+<script>
+function sayNo() {
+    alert("There is no option 😜");
+}
+
+function sayYes() {
+    document.getElementById("flowers").style.display = "block";
+}
+</script>
+
+</body>
+</html>
