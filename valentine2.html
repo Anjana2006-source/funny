@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Forever</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    from {transform: translateY(100vh);}
+    to {transform: translateY(-10vh);}
+}
+
+.container {
+    text-align: center;
+    background: rgba(255,255,255,0.2);
+    padding: 40px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    width: 350px;
+}
+
+h1, h2 {
+    color: white;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#yesBtn {
+    background: #ff4d6d;
+    color: white;
+}
+
+#noBtn {
+    background: #444;
+    color: white;
+    position: relative;
+}
+
+.quiz, #result, #flowers {
+    display: none;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating Hearts -->
+<script>
+for(let i=0;i<25;i++){
+    let heart=document.createElement("div");
+    heart.innerHTML="❤";
+    heart.className="heart";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(3+Math.random()*4)+"s";
+    document.body.appendChild(heart);
+}
+</script>
+
+<div class="container">
+
+<h1 id="mainQ">Will you be my forever? 💖</h1>
+
+<button id="yesBtn" onclick="startQuiz()">Yes ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">No 😢</button>
+
+<!-- QUIZ SECTION -->
+<div class="quiz" id="quiz">
+
+<h2 id="question"></h2>
+<div id="options"></div>
+
+</div>
+
+<!-- RESULT -->
+<div id="result"></div>
+
+<!-- FLOWERS -->
+<div id="flowers">
+💐🌸🌹🌺🌷💐
+<h2>Yayyyy!! You made my heart the happiest ❤️</h2>
+</div>
+
+</div>
+
+<script>
+
+let score=0;
+let qIndex=0;
+
+const questions=[
+{
+q:"Who is the cutest person right now? 😌",
+options:["You","You obviously","Definitely You"],
+correct:0
+},
+{
+q:"What makes life happier?",
+options:["Chocolate","You","Sleep"],
+correct:1
+},
+{
+q:"Best thing that could happen today?",
+options:["Talking to you","Watching movie","Eating pizza"],
+correct:0
+}
+];
+
+function startQuiz(){
+document.getElementById("mainQ").style.display="none";
+document.getElementById("yesBtn").style.display="none";
+document.getElementById("noBtn").style.display="none";
+document.getElementById("quiz").style.display="block";
+showQuestion();
+}
+
+function showQuestion(){
+let q=questions[qIndex];
+document.getElementById("question").innerText=q.q;
+
+let optHTML="";
+q.options.forEach((opt,i)=>{
+optHTML+=`<button onclick="checkAns(${i})">${opt}</button><br>`;
+});
+document.getElementById("options").innerHTML=optHTML;
+}
+
+function checkAns(i){
+if(i===questions[qIndex].correct){
+score++;
+}
+qIndex++;
+
+if(qIndex<questions.length){
+showQuestion();
+}else{
+showResult();
+}
+}
+
+function showResult(){
+document.getElementById("quiz").style.display="none";
+
+let res=document.getElementById("result");
+res.style.display="block";
+
+if(score>=2){
+res.innerHTML=`<h2>You scored ${score}/3 💖</h2>
+<p>You passed the love test 😍</p>`;
+setTimeout(()=>{
+document.getElementById("flowers").style.display="block";
+},1500);
+}
+else{
+res.innerHTML=`<h2>You scored ${score}/3 😊</h2>
+<p>It's okay... there is no correct answer.  
+You are already perfect ❤️</p>`;
+setTimeout(()=>{
+document.getElementById("flowers").style.display="block";
+},2000);
+}
+}
+
+/* Moving NO button */
+function moveNo(){
+let btn=document.getElementById("noBtn");
+btn.style.position="absolute";
+btn.style.top=Math.random()*80+"%";
+btn.style.left=Math.random()*80+"%";
+}
+
+</script>
+
+</body>
+</html>
